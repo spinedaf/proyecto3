@@ -8,7 +8,10 @@ package capaLogica;
 import capaAccesoBD.Conector;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +27,12 @@ public class MultiPaciente {
     private PreparedStatement buscarPaciente;
     private String buscarPacienteString;
     
+    private String borrarPacienteString;
+    private PreparedStatement borrarPaciente;
+    
+    private String buscarTodosString;
+    private PreparedStatement buscarTodos;
+    
     
     public MultiPaciente()
     {
@@ -31,11 +40,14 @@ public class MultiPaciente {
                     + "(cedula, nombre, direccion, telefono, fechaNacimiento, edad) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
         buscarPacienteString = "SELECT * FROM TPaciente WHERE cedula=?;";
-        
+        borrarPacienteString = "DELETE FROM TPaciente WHERE cedula=?";
+        buscarTodosString = "SELECT * FROM TPaciente;";
         
         try {
             crearPaciente = Conector.getConector().obtenerSentenciaPreparada(crearPacienteString);
             buscarPaciente = Conector.getConector().obtenerSentenciaPreparada(buscarPacienteString);
+            borrarPaciente = Conector.getConector().obtenerSentenciaPreparada(borrarPacienteString);
+            buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
         } catch (Exception ex) {
             Logger.getLogger(MultiPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,15 +66,51 @@ public class MultiPaciente {
             crearPaciente.setDate(5, fechaNacimiento);
             crearPaciente.setInt(6, edad);
             
-            crearPaciente.execute();
-            crearPaciente.close();
+            crearPaciente.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(MultiPaciente.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            ex.printStackTrace();
+        }
+
+        return paciente;
+
+    }
+    
+    public List<Paciente> buscarTodos()
+    {
+        List<Paciente> resultados = null;
+        ResultSet rs = null;
+        
+        try{
+            rs = buscarTodos.executeQuery();
+            resultados = new ArrayList<Paciente>();
+            
+            while(rs.next())
+            {
+                resultados.add(new Paciente(
+                        rs.getString("cedula"),
+                        rs.getString("nombre"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getDate("fechaNacimiento"),
+                        rs.getInt("edad")
+                ));
+            }
+        }
+        catch(SQLException sqlException)
+        {
+            sqlException.printStackTrace();
         }
         finally{
-            return paciente;
+            try{
+                rs.close();
+            }
+            catch(SQLException sqlException)
+            {
+                sqlException.printStackTrace();
+            }
         }
+        
+        return resultados;
     }
     
     public Paciente buscar(String cedula){
@@ -82,12 +130,20 @@ public class MultiPaciente {
                 );
             } 
             rs.close();
-            buscarPaciente.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return paciente;
+    }
+    
+    public void borrar(Paciente paciente)
+    {
+        try{
+            borrarPaciente.setString(1, paciente.getCedula());
+            borrarPaciente.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MultiPaciente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            return paciente;
         }
     }
 }
