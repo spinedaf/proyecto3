@@ -16,22 +16,26 @@ import java.util.ArrayList;
 
 
 public class Expediente {
-    private String numeroExpediente;
+    private int numeroExpediente;
     private String cedulaPaciente;
     private Date fechaApertura;
     private Paciente paciente;
     private ArrayList<Consulta> listaConsultas;
     
-    public Expediente(Object numeroExpediente, Object cedulaPaciente, Object fechaApertura) {
-    }
-
-    public void registrarConsulta(Object pnombreDoctor, Object pfehcaRealizacion, Object pdescripcionProm, Object pcodigoReceta, Object pnombreExamen) {
+    public Expediente(int pnumeroExpediente, String pcedulaPaciente, Date pfechaApertura) 
+    {
+        this.setCedulaPaciente(pcedulaPaciente);
+        this.setFechaApertura(pfechaApertura);
+        this.setNumeroExpediente(pnumeroExpediente);
+        
+        paciente = null;
+        listaConsultas = null;
     }
 
     /**
      * @return the numeroExpediente
      */
-    public String getNumeroExpediente() {
+    public int getNumeroExpediente() {
         return numeroExpediente;
     }
 
@@ -66,7 +70,7 @@ public class Expediente {
     /**
      * @param numeroExpediente the numeroExpediente to set
      */
-    private void setNumeroExpediente(String numeroExpediente) {
+    private void setNumeroExpediente(int numeroExpediente) {
         this.numeroExpediente = numeroExpediente;
     }
 
@@ -96,5 +100,11 @@ public class Expediente {
      */
     private void setListaConsultas(ArrayList<Consulta> listaConsultas) {
         this.listaConsultas = listaConsultas;
+    }
+    
+    public void registrarConsulta(String pnombreDoctor, Date pfehcaRealizacion, Date pdescripcionProm, 
+            String pcodigoReceta, String pnombreExamen) 
+    {
+        
     }
 }

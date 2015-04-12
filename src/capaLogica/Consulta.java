@@ -22,16 +22,28 @@ public class Consulta {
     private String descripcion;
     private ArrayList<Receta> medicinasRecetadas;
     private ArrayList<Examen> examenesIndicados;
-    private String codigoConsulta;
+    private int codigoConsulta;
     private ResultadoExamen resultado;
     
-    public Consulta(Object pnombreDoctor, Object pfecha, Object pdescripcion) {
+    private String expedienteAsociado;
+    
+    public Consulta(int pcodigo, String pnombreDoctor, Date pfecha, String pdescripcion, String pexpediente) {
+        
+        this.setNombreDoctor(pnombreDoctor);
+        this.setCodigoConsulta(codigoConsulta);
+        this.setFecha(pfecha);
+        this.setDescripcion(pdescripcion);
+        this.setExpedienteAsociado(pexpediente);
+        
+        resultado = null;
+        medicinasRecetadas = null;
+        examenesIndicados = null;
     }
 
     /**
      * @return the codigoConsulta
      */
-    public String getCodigoConsulta() {
+    public int getCodigoConsulta() {
         return codigoConsulta;
     }
 
@@ -80,7 +92,7 @@ public class Consulta {
     /**
      * @param codigoConsulta the codigoConsulta to set
      */
-    private void setCodigoConsulta(String codigoConsulta) {
+    private void setCodigoConsulta(int codigoConsulta) {
         this.codigoConsulta = codigoConsulta;
     }
 
@@ -124,5 +136,19 @@ public class Consulta {
      */
     private void setResultado(ResultadoExamen resultado) {
         this.resultado = resultado;
+    }
+
+    /**
+     * @return the expedienteAsociado
+     */
+    public String getExpedienteAsociado() {
+        return expedienteAsociado;
+    }
+
+    /**
+     * @param expedienteAsociado the expedienteAsociado to set
+     */
+    public void setExpedienteAsociado(String expedienteAsociado) {
+        this.expedienteAsociado = expedienteAsociado;
     }
 }
