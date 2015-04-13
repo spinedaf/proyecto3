@@ -23,7 +23,7 @@ public class Proyecto3Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("InterfazUsuario.fxml"));
         
         Scene scene = new Scene(root);
-        stage.setTitle("Clinica La Restauradora de VehÃ­culos Oseos");
+        stage.setTitle("Clinica La Restauradora de Vehículos Oseos");
         stage.setScene(scene);
         stage.show();
     }
