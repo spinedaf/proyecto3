@@ -16,16 +16,30 @@ public class Cita {
     private String numeroExpediente;
     private String cedulaDoctor;
     private Date diaCita;
+    private String descripcion;
     private String estado;
+    
     
     private Doctor doctor;
     
-    public Cita( int pcodigo, String pnumeroExpediente, String pnombreDoctor, Date pdiaCita, String pestado)
+    public Cita(String pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pestado)
+    {
+        this.setDiaCita(pdiaCita);
+        this.setNumeroExpediente(pnumeroExpediente);
+        this.setCedulaDoctor(pcedulaDoctor);
+        this.setEstado(pestado);  
+        doctor = null;
+    }
+    
+    
+    
+    public Cita( int pcodigo, String pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion, String pestado)
     {
         this.setCodigoCita(pcodigo);
         this.setDiaCita(pdiaCita);
         this.setNumeroExpediente(pnumeroExpediente);
-        this.setNombreDoctor(pnombreDoctor);
+        this.setCedulaDoctor(pcedulaDoctor);
+        this.setDescripcion(pdescripcion);
         this.setEstado(pestado);
         
         doctor = null;
@@ -48,7 +62,7 @@ public class Cita {
     /**
      * @return the nombreDoctor
      */
-    public String getNombreDoctor() {
+    public String getCedulaDoctor() {
         return cedulaDoctor;
     }
 
@@ -59,6 +73,13 @@ public class Cita {
         return diaCita;
     }
 
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
     /**
      * @return the estado
      */
@@ -83,7 +104,7 @@ public class Cita {
     /**
      * @param nombreDoctor the nombreDoctor to set
      */
-    private void setNombreDoctor(String nombreDoctor) {
+    private void setCedulaDoctor(String nombreDoctor) {
         this.cedulaDoctor = nombreDoctor;
     }
 
@@ -92,6 +113,13 @@ public class Cita {
      */
     private void setDiaCita(Date diaCita) {
         this.diaCita = diaCita;
+    }
+    
+    /**
+     * @param estado the descripcion to set
+     */
+    private void setDescripcion(String pdescripcion) {
+        this.descripcion= pdescripcion;
     }
 
     /**
