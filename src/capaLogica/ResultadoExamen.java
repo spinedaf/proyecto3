@@ -19,12 +19,28 @@ public class ResultadoExamen {
     private String nombreLugar;
     private String tipoLugar;
     private String descripcionLugar;
+    private String examenAsociado;
     private ArrayList<ItemResultado> itemes;
     
-    public ResultadoExamen(Object nombreLugar, Object tipoLugar, Object descLugar) {
+    public ResultadoExamen(String codigoResultado, String nombreLugar, String tipoLugar, 
+    		String descLugar, String examenAsociado) {
+    	
+    	this.setCodigoResultado(codigoResultado);
+    	this.setDescripcionLugar(examenAsociado);
+    	this.setNombreLugar(nombreLugar);
+    	this.setTipoLugar(tipoLugar);
+    	this.setDescripcionLugar(descLugar);
     }
 
-    /**
+    public String getExamenAsociado() {
+		return examenAsociado;
+	}
+
+	public void setExamenAsociado(String examenAsociado) {
+		this.examenAsociado = examenAsociado;
+	}
+
+	/**
      * @return the codigoResultado
      */
     public String getCodigoResultado() {
@@ -93,4 +109,6 @@ public class ResultadoExamen {
     private void setItemes(ArrayList<ItemResultado> itemes) {
         this.itemes = itemes;
     }
+    
+    
 }

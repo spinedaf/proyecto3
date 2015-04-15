@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="lib/jackcess-2.0.8.jar"/>
 	<classpathentry kind="lib" path="lib/ucanaccess-2.0.9.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
