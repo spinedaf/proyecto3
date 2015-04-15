@@ -111,11 +111,11 @@ public class MultiCita {
 	        return resultados;
 	    }
 	    
-	    public Cita buscar(String pcodigoCita){
+	    public Cita buscar(int pcodigoCita){
 	        java.sql.ResultSet rs;
 	        Cita cita = null;
 	        try {         
-	            buscarCita.setString(1, pcodigoCita);
+	            buscarCita.setInt(1, pcodigoCita);
 	            rs = buscarCita.executeQuery();
 	            if (rs.next()){
 	            	cita = new Cita(
@@ -135,10 +135,10 @@ public class MultiCita {
 	        return cita;
 	    }
 	    
-	    public void borrar(Cita pcita)
+	    public void borrar(int pcitaCodigo)
 	    {
 	        try{
-	            borrarCitaString.setInt(1, pcita.getCodigoCita());
+	            borrarCitaString.setInt(1, pcitaCodigo);
 	            borrarCitaString.executeUpdate();
 	        } catch (SQLException ex) {
 	            Logger.getLogger(MultiCita.class.getName()).log(Level.SEVERE, null, ex);

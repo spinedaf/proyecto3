@@ -17,7 +17,7 @@ public class MultiCitaTest {
 	public void testCrear() {
 		
 		String pnumeroExpediente = "1";
-		String pcedulaDoctor = "123";
+		String pcedulaDoctor = "101010";
 		Date pdiaCita = new Date(1220227200);
 		String pdescripcion = "Algo";
 		String pestado = "Algo+";
@@ -44,7 +44,7 @@ public class MultiCitaTest {
 		 List<Cita> result = test.buscarTodos(pnumeroExpediente);
 		 List<Cita> expected = test.buscarTodos(pnumeroExpediente);
 		 
-		 //System.out.println(result.size());
+		 System.out.println(result.size());
 		
 		 assertEquals(expected.get(0).getCodigoCita(),result.get(0).getCodigoCita());
 			
@@ -53,21 +53,43 @@ public class MultiCitaTest {
 	@Test
 	public void testbuscar(){
 		
-		String pcodigoCitaString = "";
+		int codigoCita = 0;
 		String pnumeroExpediente = "1";
 
 	
 		MultiCita test = new MultiCita();
 		List<Cita> lista = test.buscarTodos(pnumeroExpediente);
-		pcodigoCitaString = Integer.toString(lista.get((lista.size()-1)).getCodigoCita());
+		codigoCita = lista.get(0).getCodigoCita();
 	
-		Cita result = test.buscar(pcodigoCitaString);
+		Cita result = test.buscar(codigoCita);
 		
-		Cita expected = test.buscar(pcodigoCitaString);
+		Cita expected = test.buscar(codigoCita);
+		 
+		 System.out.println(result.getCedulaDoctor() + " " + result.getCodigoCita());
+		
+		 assertEquals(expected.getCodigoCita(),result.getCodigoCita());
+			
+	}
+
+	
+	@Test
+	public void testborrar(){
+		
+		int codigoCita = 0;
+		String pnumeroExpediente = "1";
+
+	
+		MultiCita test = new MultiCita();
+		List<Cita> lista = test.buscarTodos(pnumeroExpediente);
+		codigoCita = (lista.get((lista.size()-1)).getCodigoCita());
+	
+		test.borrar(codigoCita);
+		
+		
 		 
 		 //System.out.println(result.getCedulaDoctor() + " " + result.getCodigoCita());
 		
-		 assertEquals(expected.getCodigoCita(),result.getCodigoCita());
+		 //assertEquals(expected.getCodigoCita(),result.getCodigoCita());
 			
 	}
 	
