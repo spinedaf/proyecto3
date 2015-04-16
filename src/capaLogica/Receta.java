@@ -15,17 +15,52 @@ import java.sql.Date;
 
 
 public class Receta {
+	private int codigoReceta;
     private String dosis;
     private int numeroDias;
     private Date fechaDeInicio;
     private Date fechaFinalizacion;
-    private String nombreMedicina;
-    private Medicina medicina;
+    private String codigoMedicina;
+	private Medicina medicina;
+    private int consultaAsociada;
     
-    public Receta(Object pdosis, Object pnumDias, Object pfechaInicio, Object pfechaFinalizacion) {
+    public Receta(int pcodigoReceta, String pdosis, int pnumDias, Date pfechaInicio, Date pfechaFinalizacion, 
+    		String pmedicinaAsociada, int pconsultaAsociada) 
+    {
+    	this.setCodigoReceta(pcodigoReceta);
+    	this.setDosis(pdosis);
+    	this.setNumeroDias(pnumDias);
+    	this.setFechaDeInicio(pfechaInicio);
+    	this.setFechaFinalizacion(pfechaFinalizacion);
+    	this.setCodigoMedicina(pmedicinaAsociada);
+    	this.setConsultaAsociada(pconsultaAsociada);
     }
+    
+    public String getCodigoMedicina() {
+		return codigoMedicina;
+	}
 
-    /**
+	public void setCodigoMedicina(String codigoMedicina) {
+		this.codigoMedicina = codigoMedicina;
+	}
+
+    private void setCodigoReceta(int codigoReceta) {
+		this.codigoReceta = codigoReceta;
+	}
+
+	private void setConsultaAsociada(int consultaAsociada) {
+		this.consultaAsociada = consultaAsociada;
+	}
+
+	public int getCodigoReceta() {
+		return codigoReceta;
+	}
+
+	public int getConsultaAsociada() {
+		return consultaAsociada;
+	}
+
+	/**
      * @return the dosis
      */
     public String getDosis() {
@@ -51,13 +86,6 @@ public class Receta {
      */
     public Date getFechaFinalizacion() {
         return fechaFinalizacion;
-    }
-
-    /**
-     * @return the nombreMedicina
-     */
-    public String getNombreMedicina() {
-        return nombreMedicina;
     }
 
     /**
@@ -95,13 +123,7 @@ public class Receta {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
-    /**
-     * @param nombreMedicina the nombreMedicina to set
-     */
-    private void setNombreMedicina(String nombreMedicina) {
-        this.nombreMedicina = nombreMedicina;
-    }
-
+    
     /**
      * @param medicina the medicina to set
      */
