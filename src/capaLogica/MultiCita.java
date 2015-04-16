@@ -46,14 +46,14 @@ public class MultiCita {
 	        }
 	    }
 	    
-	    public boolean crear(String pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion,
+	    public boolean crear(int pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion,
 	            String pestado)
 	    {
 	    	
 	   
 	        try {
 
-	            crearCita.setString(1, pnumeroExpediente);
+	            crearCita.setInt(1, pnumeroExpediente);
 	            crearCita.setString(2, pcedulaDoctor);
 	            crearCita.setDate(3, pdiaCita);
 	            crearCita.setString(4, pdescripcion);
@@ -69,13 +69,13 @@ public class MultiCita {
 
 	    }
 	    
-	    public List<Cita> buscarTodos(String pnumeroExpediente)
+	    public List<Cita> buscarTodos(int pnumeroExpediente)
 	    {
 	        List<Cita> resultados = null;
 	        ResultSet rs = null;
 	        
 	        try{
-	        	buscarTodos.setString(1, pnumeroExpediente);
+	        	buscarTodos.setInt(1, pnumeroExpediente);
 	            rs = buscarTodos.executeQuery();
 	            resultados = new ArrayList<Cita>();
 	            
@@ -86,7 +86,7 @@ public class MultiCita {
 	            	
 	               resultados.add(new Cita(
 	                        rs.getInt("codigoCita"),
-	                        rs.getString("numeroExpediente"),
+	                        rs.getInt("numeroExpediente"),
 	                        rs.getString("cedulaDoctor"),
 	                        rs.getDate("diaCita"),
 	                        rs.getString("descripcion"),
@@ -120,7 +120,7 @@ public class MultiCita {
 	            if (rs.next()){
 	            	cita = new Cita(
 	                    rs.getInt("codigoCita"),
-	                    rs.getString("numeroExpediente"),
+	                    rs.getInt("numeroExpediente"),
 	                    rs.getString("cedulaDoctor"),
 	                    rs.getDate("diaCita"),
 	                    rs.getString("descripcion"),

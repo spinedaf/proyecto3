@@ -33,7 +33,7 @@ public class MultiConsulta {
                     + "VALUES (?, ?, ?, ?)";
         buscarConsultaString = "SELECT * FROM TConsulta WHERE codigoConsulta=?;";
         borrraConsulta = "DELETE * FROM TConsulta WHERE codigoConsulta=?";
-        buscarTodosString = "SELECT * FROM TConsulta WHERE numeroExpediente=?;";
+        buscarTodosString = "SELECT * FROM TConsulta WHERE expedienteAsociado=?;";
         
         try {
             crearConsulta = Conector.getConector().obtenerSentenciaPreparada(crerConsultaString);
@@ -45,8 +45,8 @@ public class MultiConsulta {
         }
     }
     
-    public boolean crear(String pcedulaDoctor, Date pfechaConsulta, String pdescripcion,
-            String expedienteAsociado)
+    public boolean crear(String pcedulaDoctor, Date pfechaConsulta, 
+    		String pdescripcion,int expedienteAsociado)
     {
     	
    
@@ -55,7 +55,7 @@ public class MultiConsulta {
             crearConsulta.setString(1, pcedulaDoctor);
             crearConsulta.setDate(2, pfechaConsulta);
             crearConsulta.setString(3, pdescripcion);
-            crearConsulta.setString(4, expedienteAsociado);       
+            crearConsulta.setInt(4, expedienteAsociado);       
             crearConsulta.executeUpdate();
             return true;
             
@@ -67,13 +67,13 @@ public class MultiConsulta {
 
     }
     
-    public List<Consulta> buscarTodos(String pnumeroExpediente)
+    public List<Consulta> buscarTodos(int pnumeroExpediente)
     {
         List<Consulta> resultados = null;
         ResultSet rs = null;
         
         try{
-        	buscarTodos.setString(1, pnumeroExpediente);
+        	buscarTodos.setInt(1, pnumeroExpediente);
             rs = buscarTodos.executeQuery();
             resultados = new ArrayList<Consulta>();
             

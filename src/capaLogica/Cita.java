@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Cita {
     private int codigoCita;
-    private String numeroExpediente;
+    private int numeroExpediente;
     private String cedulaDoctor;
     private Date diaCita;
     private String descripcion;
@@ -22,23 +22,26 @@ public class Cita {
     
     private Doctor doctor;
     
-    public Cita(String pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pestado)
+    public Cita(int pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, 
+    			String pdescripcion, String pestado)
     {
-        this.setDiaCita(pdiaCita);
-        this.setNumeroExpediente(pnumeroExpediente);
-        this.setCedulaDoctor(pcedulaDoctor);
+    	this.setNumeroExpediente(pnumeroExpediente);
+    	this.setCedulaDoctor(pcedulaDoctor);
+    	this.setDiaCita(pdiaCita);
+    	this.setDescripcion(pdescripcion);
         this.setEstado(pestado);  
         doctor = null;
     }
     
     
     
-    public Cita( int pcodigo, String pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion, String pestado)
+    public Cita( int pcodigo, int pnumeroExpediente, String pcedulaDoctor, 
+    			 Date pdiaCita, String pdescripcion, String pestado)
     {
         this.setCodigoCita(pcodigo);
-        this.setDiaCita(pdiaCita);
-        this.setNumeroExpediente(pnumeroExpediente);
+        this.setNumeroExpediente(pnumeroExpediente);    
         this.setCedulaDoctor(pcedulaDoctor);
+        this.setDiaCita(pdiaCita);  
         this.setDescripcion(pdescripcion);
         this.setEstado(pestado);
         
@@ -55,7 +58,7 @@ public class Cita {
     /**
      * @return the numeroExpediente
      */
-    public String getNumeroExpediente() {
+    public int getNumeroExpediente() {
         return numeroExpediente;
     }
 
@@ -97,7 +100,7 @@ public class Cita {
     /**
      * @param numeroExpediente the numeroExpediente to set
      */
-    private void setNumeroExpediente(String numeroExpediente) {
+    private void setNumeroExpediente(int numeroExpediente) {
         this.numeroExpediente = numeroExpediente;
     }
 

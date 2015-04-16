@@ -45,7 +45,8 @@ public class MultiExamen {
         }
     }
     
-    public boolean crear(String nombre, Date fechaSolicitud, Date fechaRealizacion, String indicaciones,int consultaAsociada)
+    public boolean crear(String nombre, Date fechaSolicitud, Date fechaRealizacion, 
+    					 String indicaciones,int consultaAsociada)
     {
     	
    
@@ -55,7 +56,7 @@ public class MultiExamen {
             crearExamen.setDate(2, fechaSolicitud);
             crearExamen.setDate(3, fechaRealizacion);
             crearExamen.setString(4, indicaciones);
-            crearExamen.setInt(4, consultaAsociada);          
+            crearExamen.setInt(5, consultaAsociada);          
             crearExamen.executeUpdate();
             return true;
             
