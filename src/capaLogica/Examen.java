@@ -17,12 +17,41 @@ import java.sql.Date;
 public class Examen {
     private String nombre;
     private Date fechaSolcitud;
-    private String fechaRealizacion;
+    private Date fechaRealizacion;
     private String indicaciones;
+    private int consultaAsociada;
+    private ResultadoExamen resultadoExamen;
     
-    public Examen(Object nombre, Object fechaSolicitud, Object fechaRealizacion, Object indicaciones) {
+    public Examen(String pnombre, Date pfechaSolicitud, Date pfechaRealizacion, String pindicaciones, int pconsultaAsociada) 
+    {
+    	setNombre(pnombre);
+    	setFechaSolcitud(pfechaSolicitud);
+    	setFechaRealizacion(pfechaRealizacion);
+    	setIndicaciones(pindicaciones);
+    	setConsultaAsociada(pconsultaAsociada);
+    	
+    }
+    
+    public Examen(String pnombre, Date pfechaSolicitud, Date pfechaRealizacion, 
+    		String pindicaciones, int pconsultaAsociada, ResultadoExamen presultadoExamen) 
+    {
+    	setNombre(pnombre);
+    	setFechaSolcitud(pfechaSolicitud);
+    	setFechaRealizacion(pfechaRealizacion);
+    	setIndicaciones(pindicaciones);
+    	setConsultaAsociada(pconsultaAsociada);
+    	setResultadoExamen(presultadoExamen);
+    	
     }
 
+    
+    /**
+     * @param consultaAsociada the nomconsultaAsociadabre to set
+     */
+    private void setConsultaAsociada(int pconsultaAsociada) {
+        this.consultaAsociada = pconsultaAsociada;
+    }
+    
     /**
      * @param nombre the nombre to set
      */
@@ -40,7 +69,7 @@ public class Examen {
     /**
      * @param fechaRealizacion the fechaRealizacion to set
      */
-    private void setFechaRealizacion(String fechaRealizacion) {
+    private void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
 
@@ -49,6 +78,20 @@ public class Examen {
      */
     private void setIndicaciones(String indicaciones) {
         this.indicaciones = indicaciones;
+    }
+    
+    /**
+     * @param resultadoExamen the resultadoExamen to set
+     */
+    private void setResultadoExamen(ResultadoExamen presultadoExamen) {
+        this.resultadoExamen = presultadoExamen;
+    }
+    
+    /**
+     * @return the nomconsultaAsociadabre 
+     */
+    private int getConsultaAsociada() {
+        return consultaAsociada;
     }
 
     /**
@@ -68,7 +111,7 @@ public class Examen {
     /**
      * @return the fechaRealizacion
      */
-    public String getFechaRealizacion() {
+    public Date getFechaRealizacion() {
         return fechaRealizacion;
     }
 
@@ -78,4 +121,14 @@ public class Examen {
     public String getIndicaciones() {
         return indicaciones;
     }
+    
+    /**
+     * @retun the resultadoExamen to set
+     */
+    private ResultadoExamen getResultadoExamen() {
+        return resultadoExamen;
+    }
+    
+    
+    
 }

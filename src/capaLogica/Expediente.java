@@ -16,13 +16,21 @@ import java.util.ArrayList;
 
 
 public class Expediente {
-    private String numeroExpediente;
+    private int numeroExpediente;
     private String cedulaPaciente;
     private Date fechaApertura;
     private Paciente paciente;
     private ArrayList<Consulta> listaConsultas;
     
-    public Expediente(String pnumeroExpediente, String pcedulaPaciente, Date pfechaApertura) 
+    public Expediente(String pcedulaPaciente, Date pfechaApertura) 
+    {
+        this.setCedulaPaciente(pcedulaPaciente);
+        this.setFechaApertura(pfechaApertura);
+
+    }
+    
+    
+    public Expediente(int pnumeroExpediente, String pcedulaPaciente, Date pfechaApertura) 
     {
         this.setCedulaPaciente(pcedulaPaciente);
         this.setFechaApertura(pfechaApertura);
@@ -35,7 +43,7 @@ public class Expediente {
     /**
      * @return the numeroExpediente
      */
-    public String getNumeroExpediente() {
+    public int getNumeroExpediente() {
         return numeroExpediente;
     }
 
@@ -70,7 +78,7 @@ public class Expediente {
     /**
      * @param numeroExpediente the numeroExpediente to set
      */
-    private void setNumeroExpediente(String numeroExpediente) {
+    private void setNumeroExpediente(int numeroExpediente) {
         this.numeroExpediente = numeroExpediente;
     }
 
