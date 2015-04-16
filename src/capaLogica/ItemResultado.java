@@ -18,8 +18,24 @@ public class ItemResultado {
     private Double limiteInferior;
     private Double limiteSuperior;
     private String unidadMedicion;
+    private String resultadoAsociado;
 
-    public ItemResultado(String pnombre, String pvalor, String plimiteInf, String plimiteSup, String punMed) {
+    public String getResultadoAsociado() {
+		return resultadoAsociado;
+	}
+
+
+
+	private void setResultadoAsociado(String resultadoAsociado) {
+		this.resultadoAsociado = resultadoAsociado;
+	}
+
+
+
+	public ItemResultado(String pnombre, double pvalor, double plimiteInf, double plimiteSup, String punMed,
+    		String resultadoAsociado) 
+    {
+    	
     }
         
         
