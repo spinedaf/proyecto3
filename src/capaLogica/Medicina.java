@@ -13,11 +13,23 @@ package capaLogica;
 
 
 public class Medicina {
-    private String nombre;
+	private String codigo;
+	private String nombre;
     private String precauciones;
 
-    public Medicina(String pnombre, String pprecauciones) {
+    public Medicina(String pcodigo, String pnombre, String pprecauciones) {
+    	this.setCodigo(pcodigo);
+    	this.setNombre(pnombre);
+    	this.setPrecauciones(pprecauciones);
     }
+    
+    public String getCodigo() {
+		return codigo;
+	}
+
+	private void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
     /**
      * @param nombre the nombre to set
