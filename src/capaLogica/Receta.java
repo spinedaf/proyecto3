@@ -22,7 +22,12 @@ public class Receta {
     private String nombreMedicina;
     private Medicina medicina;
     
-    public Receta(Object pdosis, Object pnumDias, Object pfechaInicio, Object pfechaFinalizacion) {
+    public Receta(String pdosis, int pnumDias, Date pfechaInicio, Date pfechaFinalizacion) 
+    {
+    	this.setDosis(pdosis);
+    	this.setNumeroDias(pnumDias);
+    	this.setFechaDeInicio(pfechaInicio);
+    	this.setFechaFinalizacion(pfechaFinalizacion);
     }
 
     /**
