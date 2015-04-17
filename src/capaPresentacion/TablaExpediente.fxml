@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import fxmltableview.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+
+<GridPane id="DoctorsPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="capaControlador.InterfazUsuarioController">
+       
+	<padding>
+	    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+	   <children>
+	<Label style="-fx-font: NORMAL 15 Tahoma;" text="Libreta de doctores" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	     <TableView fx:id="tablaDoctores" editable="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
+	       <columns>
+	     <TableColumn fx:id="firstNameColumn" prefWidth="149.0" text="Número de Expediente">
+	       <cellValueFactory>
+	         <PropertyValueFactory property="Cedula" />
+	       </cellValueFactory>
+	     </TableColumn>
+	     <TableColumn prefWidth="105.0" text="Cedula Paciente">
+	       <cellValueFactory>
+	         <PropertyValueFactory property="Nombre" />
+	       </cellValueFactory>
+	     </TableColumn>
+	     <TableColumn prefWidth="139.0" text="Fecha de Apertura">
+	       <cellValueFactory>
+	         <PropertyValueFactory property="Especialidad" />
+	       </cellValueFactory>
+	     </TableColumn>
+	    </columns> 
+	     </TableView>
+	     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+	        <children>
+	            <TextField fx:id="idDoctorField" prefHeight="25.0" prefWidth="149.0" promptText="ID" />
+	            <TextField fx:id="nombreDoctorField" prefHeight="25.0" prefWidth="103.0" promptText="Nombre" />
+	            <TextField fx:id="especialidadField" prefHeight="25.0" prefWidth="118.0" promptText="Especialidad" />
+	            <Button onAction="#addDoctor" text="Agregar" />
+	        </children>
+	    </HBox>
+	   </children>
+	        <columnConstraints>
+	           <ColumnConstraints />
+	        </columnConstraints>
+	        <rowConstraints>
+	           <RowConstraints />
+	           <RowConstraints />
+	           <RowConstraints />
+	        </rowConstraints>
+   </GridPane>

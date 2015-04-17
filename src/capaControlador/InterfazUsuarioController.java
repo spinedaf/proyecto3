@@ -45,11 +45,10 @@ public class InterfazUsuarioController implements Initializable {
     @FXML
     protected void addDoctor(ActionEvent event) {
         ObservableList<Doctor> data = tablaDoctores.getItems();
-        data.add(new Doctor(idDoctorField.getText(),
-        	nombreDoctorField.getText(),
-        	especialidadField.getText(),
-        	telefonoField.getText()
-        ));
+        Doctor doctor = (new MultiDoctor()).crear(idDoctorField.getText(), nombreDoctorField.getText(), 
+        		especialidadField.getText(), telefonoField.getText());
+        
+        data.add(doctor);
         
         idDoctorField.setText("");
         nombreDoctorField.setText("");

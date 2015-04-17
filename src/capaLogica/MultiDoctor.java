@@ -45,25 +45,24 @@ public class MultiDoctor {
         }
     }
     
-    public boolean crear(String pcedula, String pnombre, String pespecialidad, String ptelefono)
+    public Doctor crear(String pcedula, String pnombre, String pespecialidad, String ptelefono)
     {
-    	
-   
+    	Doctor doctor = null;
         try {
-
+        	
             crearDoctor.setString(1, pcedula);
             crearDoctor.setString(2, pnombre);
             crearDoctor.setString(3, pespecialidad);
             crearDoctor.setString(4, ptelefono);
                        
             crearDoctor.executeUpdate();
-            return true;
+            doctor = new Doctor(pcedula,pnombre,pespecialidad,ptelefono);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return false;
+        return doctor;
 
     }
     

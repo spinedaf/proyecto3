@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import capaLogica.MultiConsulta;
 import capaLogica.MultiDoctor;
+import capaLogica.Doctor;
 
 public class MultiDoctorTest {
 
@@ -20,9 +21,10 @@ public class MultiDoctorTest {
 		String pexpedienteAsociado = "House123";
 		
 		MultiDoctor test = new MultiDoctor();
-		Boolean result = test.crear(pcedulaDoctor,pnombre,pespecialidad,pexpedienteAsociado);	
+		Doctor result = test.crear(pcedulaDoctor,pnombre,pespecialidad,pexpedienteAsociado);	
+		Doctor exp = new Doctor(pcedulaDoctor,pnombre,pespecialidad,pexpedienteAsociado);
 
-		assertEquals(true,result);
+		assertEquals(exp.getCedula(),result.getCedula());
 		
 		//fail("Not yet implemented");
 		

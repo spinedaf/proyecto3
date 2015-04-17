@@ -54,7 +54,7 @@ public class MultiResultadoExamen {
     {
     	ResultadoExamen resultado = null;
         try {
-        	resultado = new ResultadoExamen(codigoResultado,nombreLugar,tipoLugar,descripcionLugar,examenAsociado);
+        	
         	crearResultadoExamen.setString(1, codigoResultado);
         	crearResultadoExamen.setString(2, nombreLugar);
         	crearResultadoExamen.setString(3, tipoLugar);
@@ -62,6 +62,7 @@ public class MultiResultadoExamen {
         	crearResultadoExamen.setString(5, examenAsociado);
             
         	crearResultadoExamen.executeUpdate();
+        	resultado = new ResultadoExamen(codigoResultado,nombreLugar,tipoLugar,descripcionLugar,examenAsociado);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
