@@ -25,6 +25,8 @@ public class MultiExamen {
     private String buscarTodosString;
     private PreparedStatement buscarTodos;
     
+    private String buscarPorConsultaString;
+    private PreparedStatement buscarPorConsulta;
     
     public MultiExamen()
     {
@@ -34,12 +36,14 @@ public class MultiExamen {
         buscarExamenString = "SELECT * FROM TExamen WHERE nombre=?;";
         borrarExamen = "DELETE * FROM TExamen WHERE nombre=?";
         buscarTodosString = "SELECT * FROM TExamen;";
+        buscarPorConsultaString = "SELECT * FROM TExamen WHERE consultaAsociada=?;";
         
         try {
             crearExamen = Conector.getConector().obtenerSentenciaPreparada(crearExamenString);
             buscarExamen = Conector.getConector().obtenerSentenciaPreparada(buscarExamenString);
             borrarExamenString = Conector.getConector().obtenerSentenciaPreparada(borrarExamen);
             buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
+            buscarPorConsulta = Conector.getConector().obtenerSentenciaPreparada(buscarPorConsultaString);
         } catch (Exception ex) {
             Logger.getLogger(MultiExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,8 +52,6 @@ public class MultiExamen {
     public boolean crear(String nombre, Date fechaSolicitud, Date fechaRealizacion, 
     					 String indicaciones,int consultaAsociada)
     {
-    	
-   
         try {
 
             crearExamen.setString(1, nombre);
@@ -130,6 +132,47 @@ public class MultiExamen {
         }
 
         return examen;
+    }
+    
+    public List<Examen> buscarPorConsulta()
+    {
+        List<Examen> resultados = null;
+        ResultSet rs = null;
+        
+        try{
+        	
+            rs = buscarPorConsulta.executeQuery();
+            resultados = new ArrayList<Examen>();
+            
+            
+            while(rs.next())
+            {
+            	
+            	
+               resultados.add(new Examen(
+                        rs.getString("nombre"),
+                        rs.getDate("fechaSolicitud"),
+                        rs.getDate("fechaRealizacion"),
+                        rs.getString("indicaciones"),
+                        rs.getInt("consultaAsociada")
+                ));
+            }
+        }
+        catch(SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        finally{
+            try{
+                rs.close();
+            }
+            catch(SQLException sqlException)
+            {
+                sqlException.printStackTrace();
+            }
+        }
+        
+        return resultados;
     }
     
     public void borrar(String pnombre)

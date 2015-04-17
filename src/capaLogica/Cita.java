@@ -48,7 +48,23 @@ public class Cita {
         doctor = null;
     }
 
-    /**
+    public Doctor getDoctor() {
+    	if(doctor == null)
+    	{
+    		doctor = (new MultiDoctor()).buscar(cedulaDoctor);
+    	}
+		return doctor;
+	}
+
+
+
+	private void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+
+
+	/**
      * @return the codigoCita
      */
     public int getCodigoCita() {

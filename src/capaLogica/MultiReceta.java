@@ -25,12 +25,16 @@ public class MultiReceta {
     private String buscarTodosString;
     private PreparedStatement buscarTodos;
     
+    private String buscarRecetaPorConsultaString;
+    private PreparedStatement buscarPorConsulta;
+    
     public MultiReceta()
     {
     	crearRecetaString = "INSERT INTO TReceta "
                 + "(codigoReceta, dosis, numeroDias, fechaDeInicio, fechaFinalizacion, codigoMedicina, consultaAsociada) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
     	buscarRecetaString = "SELECT * FROM TReceta WHERE codigoReceta=?;";
+    	buscarRecetaPorConsultaString = "SELECT * FROM TReceta WHERE consultaAsociada=?;";
     	borrarRecetaString = "DELETE FROM TReceta WHERE codigoReceta=?";
 	    buscarTodosString = "SELECT * FROM TReceta;";
 	    
@@ -39,6 +43,7 @@ public class MultiReceta {
 	    	buscarReceta = Conector.getConector().obtenerSentenciaPreparada(buscarRecetaString);
 	    	borrarReceta = Conector.getConector().obtenerSentenciaPreparada(borrarRecetaString);
 	        buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
+	        buscarPorConsulta = Conector.getConector().obtenerSentenciaPreparada(buscarRecetaPorConsultaString);
 	    } catch (Exception ex) {
 	        Logger.getLogger(MultiPaciente.class.getName()).log(Level.SEVERE, null, ex);
 	    }
@@ -130,6 +135,45 @@ public class MultiReceta {
         }
 
         return receta;
+    }
+    
+    public List<Receta> buscarPorConsulta(int consultaAsociada)
+    {
+    	List<Receta> resultados = null;
+        ResultSet rs = null;
+        
+        try{
+            rs = buscarPorConsulta.executeQuery();
+            resultados = new ArrayList<Receta>();
+            
+            while(rs.next())
+            {
+                resultados.add(new Receta(
+                        rs.getInt("pcodigoReceta"),
+                        rs.getString("pdosis"),
+                        rs.getInt("pnumeroDias"),
+                        rs.getDate("pfechaDeInicio"),
+                        rs.getDate("pfechaFinalizacion"),
+                        rs.getString("pcodigoMedicina"),
+                        rs.getInt("edad")
+                ));
+            }
+        }
+        catch(SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        finally{
+            try{
+                rs.close();
+            }
+            catch(SQLException sqlException)
+            {
+                sqlException.printStackTrace();
+            }
+        }
+        
+        return resultados;
     }
     
     public void borrar(Receta receta)

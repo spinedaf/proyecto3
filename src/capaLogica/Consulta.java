@@ -13,6 +13,7 @@ package capaLogica;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Consulta {
@@ -21,9 +22,8 @@ public class Consulta {
 	private String cedulaDoctor;
     private Date fecha;
     private String descripcion;
-    private ArrayList<Receta> medicinasRecetadas;
-    private ArrayList<Examen> examenesIndicados;
-    private ResultadoExamen resultado; 
+    private List<Receta> recetasRecetadas;
+    private List<Examen> examenesIndicados;
     private int expedienteAsociado;
     
     public Consulta(String pcedulaDoctor, Date pfecha, String pdescripcion, int pexpediente) {
@@ -33,8 +33,7 @@ public class Consulta {
         this.setDescripcion(pdescripcion);
         this.setExpedienteAsociado(pexpediente);
         
-        resultado = null;
-        medicinasRecetadas = null;
+        recetasRecetadas = null;
         examenesIndicados = null;
     }
     
@@ -46,8 +45,7 @@ public class Consulta {
         this.setDescripcion(pdescripcion);
         this.setExpedienteAsociado(pexpediente);
         
-        resultado = null;
-        medicinasRecetadas = null;
+        recetasRecetadas = null;
         examenesIndicados = null;
     }
 
@@ -82,24 +80,23 @@ public class Consulta {
     /**
      * @return the medicinasRecetadas
      */
-    public ArrayList<Receta> getMedicinasRecetadas() {
-        return medicinasRecetadas;
+    public List<Receta> getRecetas() {
+    	if(recetasRecetadas == null)
+    	{
+    		recetasRecetadas = (new MultiReceta()).buscarPorConsulta(this.getExpedienteAsociado());
+    	}
+        return recetasRecetadas;
     }
 
     /**
      * @return the examenesIndicados
      */
-    public ArrayList<Examen> getExamenesIndicados() {
+    public List<Examen> getExamenesIndicados() {
+    	
         return examenesIndicados;
     }
 
-    /**
-     * @return the resultado
-     */
-    public ResultadoExamen getResultado() {
-        return resultado;
-    }
-
+    
     /**
      * @param codigoConsulta the codigoConsulta to set
      */
@@ -131,8 +128,8 @@ public class Consulta {
     /**
      * @param medicinasRecetadas the medicinasRecetadas to set
      */
-    private void setMedicinasRecetadas(ArrayList<Receta> medicinasRecetadas) {
-        this.medicinasRecetadas = medicinasRecetadas;
+    private void setRecetas(ArrayList<Receta> medicinasRecetadas) {
+        this.recetasRecetadas = medicinasRecetadas;
     }
 
     /**
@@ -142,13 +139,7 @@ public class Consulta {
         this.examenesIndicados = examenesIndicados;
     }
 
-    /**
-     * @param resultado the resultado to set
-     */
-    private void setResultado(ResultadoExamen resultado) {
-        this.resultado = resultado;
-    }
-
+   
     /**
      * @return the expedienteAsociado
      */
