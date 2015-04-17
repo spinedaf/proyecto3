@@ -92,6 +92,10 @@ public class Receta {
      * @return the medicina
      */
     public Medicina getMedicina() {
+    	if(medicina == null)
+    	{
+    		medicina = (new MultiMedicina()).buscar(this.getCodigoMedicina());
+    	}
         return medicina;
     }
 

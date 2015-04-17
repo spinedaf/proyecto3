@@ -12,6 +12,7 @@
 package capaLogica;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ResultadoExamen {
@@ -20,7 +21,7 @@ public class ResultadoExamen {
     private String tipoLugar;
     private String descripcionLugar;
     private String examenAsociado;
-    private ArrayList<ItemResultado> itemes;
+    private List<ItemResultado> itemes;
     
     public ResultadoExamen(String codigoResultado, String nombreLugar, String tipoLugar, 
     		String descLugar, String examenAsociado) {
@@ -71,7 +72,11 @@ public class ResultadoExamen {
     /**
      * @return the itemes
      */
-    public ArrayList<ItemResultado> getItemes() {
+    public List<ItemResultado> getItemes() {
+    	if(itemes == null)
+    	{
+    		itemes = (new MultiItemResultado()).buscarPorResultado(this.getCodigoResultado());
+    	}
         return itemes;
     }
 

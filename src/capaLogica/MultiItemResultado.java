@@ -25,6 +25,9 @@ public class MultiItemResultado {
     private String buscarTodosString;
     private PreparedStatement buscarTodos;
     
+    private String buscarPorResultadoString;
+    private PreparedStatement buscarPorResultado;
+    
     public MultiItemResultado()
     {
     	crearItemResultadoString = "INSERT INTO TItemAsociado "
@@ -33,12 +36,14 @@ public class MultiItemResultado {
     	buscarItemResultadoString = "SELECT * FROM TItemAsociado WHERE nombre=?;";
     	borrarItemResultadoString = "DELETE FROM TItemAsociado WHERE nombre=?";
 	    buscarTodosString = "SELECT * FROM TItemAsociado;";
+	    buscarPorResultadoString = "SELECT * FROM TItemAsociado WHERE resultadoAsociado=?;";
 	    
 	    try {
 	    	crearItemResultado = Conector.getConector().obtenerSentenciaPreparada(crearItemResultadoString);
 	    	buscarItemResultado = Conector.getConector().obtenerSentenciaPreparada(buscarItemResultadoString);
 	    	borrarItemResultado = Conector.getConector().obtenerSentenciaPreparada(borrarItemResultadoString);
 	        buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
+	        buscarPorResultado = Conector.getConector().obtenerSentenciaPreparada(buscarPorResultadoString);
 	    } catch (Exception ex) {
 	    	ex.printStackTrace();
 	    }
@@ -74,6 +79,44 @@ public class MultiItemResultado {
         
         try{
             rs = buscarTodos.executeQuery();
+            resultados = new ArrayList<ItemResultado>();
+            
+            while(rs.next())
+            {
+                resultados.add(new ItemResultado(
+                        rs.getString("nombre"),
+                        rs.getDouble("valor"),
+                        rs.getDouble("limiteSuperior"),
+                        rs.getDouble("limiteInferior"),
+                        rs.getString("unidadMedicion"),
+                        rs.getString("resultadoAsociado")
+                ));
+            }
+        }
+        catch(SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        finally{
+            try{
+                rs.close();
+            }
+            catch(SQLException sqlException)
+            {
+                sqlException.printStackTrace();
+            }
+        }
+        
+        return resultados;
+    }
+    
+    public List<ItemResultado> buscarPorResultado( String pcodigoResultado)
+    {
+        List<ItemResultado> resultados = null;
+        ResultSet rs = null;
+        
+        try{
+            rs = buscarPorResultado.executeQuery();
             resultados = new ArrayList<ItemResultado>();
             
             while(rs.next())
