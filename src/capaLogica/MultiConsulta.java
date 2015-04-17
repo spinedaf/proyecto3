@@ -25,6 +25,8 @@ public class MultiConsulta {
     private String buscarTodosString;
     private PreparedStatement buscarTodos;
     
+    private PreparedStatement buscarPorExpediente;
+    private String buscarPorExpedienteString;
     
     public MultiConsulta()
     {
@@ -33,13 +35,15 @@ public class MultiConsulta {
                     + "VALUES (?, ?, ?, ?)";
         buscarConsultaString = "SELECT * FROM TConsulta WHERE codigoConsulta=?;";
         borrraConsulta = "DELETE * FROM TConsulta WHERE codigoConsulta=?";
-        buscarTodosString = "SELECT * FROM TConsulta WHERE expedienteAsociado=?;";
+        buscarTodosString = "SELECT * FROM TConsulta;";
+        buscarPorExpedienteString = "SELECT * FROM TConsulta WHERE expedienteAsociado=?;";
         
         try {
             crearConsulta = Conector.getConector().obtenerSentenciaPreparada(crerConsultaString);
             buscarConsulta = Conector.getConector().obtenerSentenciaPreparada(buscarConsultaString);
             borrarConsultaString = Conector.getConector().obtenerSentenciaPreparada(borrraConsulta);
             buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
+            buscarPorExpediente = Conector.getConector().obtenerSentenciaPreparada(buscarPorExpedienteString);
         } catch (Exception ex) {
             Logger.getLogger(MultiConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -128,6 +132,45 @@ public class MultiConsulta {
         }
 
         return consulta;
+    }
+    
+    public List<Consulta> buscarPorExpediente(int pexpedienteAsociado){
+    	List<Consulta> resultados = null;
+        ResultSet rs = null;
+        
+        try{
+        	buscarPorExpediente.setInt(1, pexpedienteAsociado);
+            rs = buscarPorExpediente.executeQuery();
+            resultados = new ArrayList<Consulta>();
+            
+            
+            while(rs.next())
+            {
+            	
+            	
+               resultados.add(new Consulta(
+                        rs.getString("cedulaDoctor"),
+                        rs.getDate("fechaConsulta"),
+                        rs.getString("descripcion"),
+                        rs.getInt("expedienteAsociado")
+                ));
+            }
+        }
+        catch(SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+        finally{
+            try{
+                rs.close();
+            }
+            catch(SQLException sqlException)
+            {
+                sqlException.printStackTrace();
+            }
+        }
+        
+        return resultados;
     }
     
     public void borrar(int pcodigoConsulta)

@@ -13,6 +13,7 @@ package capaLogica;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Expediente {
@@ -20,7 +21,7 @@ public class Expediente {
     private String cedulaPaciente;
     private Date fechaApertura;
     private Paciente paciente;
-    private ArrayList<Consulta> listaConsultas;
+    private List<Consulta> listaConsultas;
     
     public Expediente(String pcedulaPaciente, Date pfechaApertura) 
     {
@@ -65,13 +66,21 @@ public class Expediente {
      * @return the paciente
      */
     public Paciente getPaciente() {
+    	if(paciente == null)
+    	{
+    		paciente = (new MultiPaciente()).buscar(this.getCedulaPaciente());
+    	}
         return paciente;
     }
 
     /**
      * @return the listaConsultas
      */
-    public ArrayList<Consulta> getListaConsultas() {
+    public List<Consulta> getListaConsultas() {
+    	if(listaConsultas == null)
+    	{
+    		listaConsultas = (new MultiConsulta()).buscarPorExpediente(this.getNumeroExpediente());
+    	}
         return listaConsultas;
     }
 
