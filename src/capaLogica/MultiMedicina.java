@@ -29,7 +29,7 @@ public class MultiMedicina {
     {
     	crearMedicinaString = "INSERT INTO TMedicina "
                 + "(codigo, nombre, precauciones) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?)";
     	buscarMedicinaString = "SELECT * FROM TMedicina WHERE codigo=?;";
     	borrarMedicinaString = "DELETE FROM TMedicina WHERE codigo=?";
 	    buscarTodosString = "SELECT * FROM TMedicina;";
