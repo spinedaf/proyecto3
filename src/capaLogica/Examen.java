@@ -125,7 +125,11 @@ public class Examen {
     /**
      * @retun the resultadoExamen to set
      */
-    private ResultadoExamen getResultadoExamen() {
+    public ResultadoExamen getResultadoExamen() {
+    	if(resultadoExamen == null)
+    	{
+    		resultadoExamen = (new MultiResultadoExamen()).buscarPorExamen(this.getNombre());
+    	}
         return resultadoExamen;
     }
     

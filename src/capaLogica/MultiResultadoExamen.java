@@ -25,6 +25,9 @@ public class MultiResultadoExamen {
     private String buscarTodosString;
     private PreparedStatement buscarTodos;
     
+    private String buscarPorExamenString;
+    private PreparedStatement buscarPorExamen;
+    
     public MultiResultadoExamen()
     {
     	crearResultadoExamenString = "INSERT INTO TResultadoExamen "
@@ -33,12 +36,14 @@ public class MultiResultadoExamen {
     	buscarResultadoExamenString = "SELECT * FROM TResultadoExamen WHERE codigoResultado=?;";
     	borrarResultadoExamenString = "DELETE FROM TResultadoExamen WHERE codigoResultado=?";
 	    buscarTodosString = "SELECT * FROM TResultadoExamen;";
+	    buscarPorExamenString = "SELECT * FROM TResultadoExamen WHERE examenAsociado=?;";
 	    
 	    try {
 	    	crearResultadoExamen = Conector.getConector().obtenerSentenciaPreparada(crearResultadoExamenString);
 	    	buscarResultadoExamen = Conector.getConector().obtenerSentenciaPreparada(buscarResultadoExamenString);
 	    	borrarResultadoExamen = Conector.getConector().obtenerSentenciaPreparada(borrarResultadoExamenString);
 	        buscarTodos = Conector.getConector().obtenerSentenciaPreparada(buscarTodosString);
+	        buscarPorExamen = Conector.getConector().obtenerSentenciaPreparada(buscarPorExamenString);
 	    } catch (Exception ex) {
 	        Logger.getLogger(MultiPaciente.class.getName()).log(Level.SEVERE, null, ex);
 	    }
@@ -100,6 +105,30 @@ public class MultiResultadoExamen {
         }
         
         return resultados;
+    }
+    
+    public ResultadoExamen buscarPorExamen(String examenAsociado)
+    {
+    	java.sql.ResultSet rs;
+        ResultadoExamen resultado = null;
+        try {         
+        	buscarPorExamen.setString(1, examenAsociado);
+            rs = buscarPorExamen.executeQuery();
+            if (rs.next()){
+                resultado = new ResultadoExamen(
+                		rs.getString("codigoResultado"),
+                        rs.getString("nombreLugar"),
+                        rs.getString("tipoLugar"),
+                        rs.getString("descripcionLugar"),
+                        rs.getString("examenAsociado")
+                );
+            } 
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return resultado;
     }
     
     public ResultadoExamen buscar(String codigoResultado){
