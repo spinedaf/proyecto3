@@ -20,7 +20,19 @@ public class ItemResultado {
     private String unidadMedicion;
     private String resultadoAsociado;
 
-    public String getResultadoAsociado() {
+	public ItemResultado(String pnombre, double pvalor, double plimiteInf, double plimiteSup, String punMed,
+    		String presultadoAsociado) 
+    {
+		this.setNombre(pnombre);
+		this.setValor(pvalor);
+		this.setLimiteInferior(plimiteInf);
+		this.setLimiteSuperior(plimiteSup);
+		this.setUnidadMedicion(punMed);
+		this.setResultadoAsociado(presultadoAsociado);
+		
+    }   
+        
+	public String getResultadoAsociado() {
 		return resultadoAsociado;
 	}
 
@@ -29,16 +41,6 @@ public class ItemResultado {
 	private void setResultadoAsociado(String resultadoAsociado) {
 		this.resultadoAsociado = resultadoAsociado;
 	}
-
-
-
-	public ItemResultado(String pnombre, double pvalor, double plimiteInf, double plimiteSup, String punMed,
-    		String resultadoAsociado) 
-    {
-    	
-    }
-        
-        
 	
     public boolean excedeValorNormal() {
         return false;
