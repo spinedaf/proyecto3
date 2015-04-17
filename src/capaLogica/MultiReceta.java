@@ -31,7 +31,7 @@ public class MultiReceta {
                 + "(codigoReceta, dosis, numeroDias, fechaDeInicio, fechaFinalizacion, codigoMedicina, consultaAsociada) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
     	buscarRecetaString = "SELECT * FROM TReceta WHERE codigoReceta=?;";
-    	borrarRecetaString = "DELETE FROM TReceta WHERE codigoResultado=?";
+    	borrarRecetaString = "DELETE FROM TReceta WHERE codigoReceta=?";
 	    buscarTodosString = "SELECT * FROM TReceta;";
 	    
 	    try {
