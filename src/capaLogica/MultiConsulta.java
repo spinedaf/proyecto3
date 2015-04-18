@@ -35,7 +35,7 @@ public class MultiConsulta {
                     + "VALUES (?, ?, ?, ?)";
         buscarConsultaString = "SELECT * FROM TConsulta WHERE codigoConsulta=?;";
         borrraConsulta = "DELETE * FROM TConsulta WHERE codigoConsulta=?";
-        buscarTodosString = "SELECT * FROM TConsulta;";
+        buscarTodosString = "SELECT * FROM TConsulta WHERE expedienteAsociado=?;";
         buscarPorExpedienteString = "SELECT * FROM TConsulta WHERE expedienteAsociado=?;";
         
         try {
