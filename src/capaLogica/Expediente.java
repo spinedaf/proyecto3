@@ -47,6 +47,11 @@ public class Expediente {
     public int getNumeroExpediente() {
         return numeroExpediente;
     }
+    
+    public String getCSM()
+    {
+    	return "CSM-" + numeroExpediente;
+    }
 
     /**
      * @return the cedulaPaciente

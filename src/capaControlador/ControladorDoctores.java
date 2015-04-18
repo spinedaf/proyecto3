@@ -23,7 +23,7 @@ import capaLogica.*;
  *
  * @author pinedas
  */
-public class InterfazUsuarioController implements Initializable {
+public class ControladorDoctores implements Initializable {
 	
 	@FXML private TableView<Doctor> tablaDoctores;
     @FXML private TextField idDoctorField;

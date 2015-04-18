@@ -6,7 +6,7 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import capaLogica.MultiExamen;
+import capaLogica.Expediente;
 import capaLogica.MultiExpediente;
 
 public class MultiExpedienteTest {
@@ -21,11 +21,11 @@ public class MultiExpedienteTest {
 		String cedulaPaciente = "123";
 		Date fechaApertura = new Date(1220227200);
 
-		
 		MultiExpediente test = new MultiExpediente();
-		Boolean result = test.crear(cedulaPaciente,fechaApertura);	
+		Expediente result = test.crear(cedulaPaciente,fechaApertura);	
+		Expediente exp = new Expediente(cedulaPaciente, fechaApertura);
 
-		assertEquals(true,result);
+		assertEquals(result.getCedulaPaciente(),exp.getCedulaPaciente());
 		
 
 		

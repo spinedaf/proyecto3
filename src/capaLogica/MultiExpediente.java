@@ -46,22 +46,20 @@ public class MultiExpediente {
         }
     }
     
-    public boolean crear(String pcedulaPaciente, Date pfechaApertura)
+    public Expediente crear(String pcedulaPaciente, Date pfechaApertura)
     {
-    	
-   
+    	Expediente exp = null;  
         try {
-
             crearExpediente.setString(1, pcedulaPaciente);
             crearExpediente.setDate(2, pfechaApertura);
             crearExpediente.executeUpdate();
-            return true;
+            exp = new Expediente(pcedulaPaciente, pfechaApertura);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return false;
+        return exp;
 
     }
     

@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
-  <tabs>
-    <Tab text="Doctores">
-       <content>
-       	<fx:include fx:id="DoctorsPane" source="TablaDoctores.fxml" />
-       </content>
-    </Tab>
-    <Tab text="Untitled Tab 2" />
-  </tabs>
-</TabPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<TabPane tabClosingPolicy="UNAVAILABLE">
+	  <tabs>
+	    <Tab text="Doctores">
+	       <content>
+	          <AnchorPane>
+	             <children>
+	             	<fx:include fx:id="DoctorsPane" source="TablaDoctores.fxml" />
+	                  
+	             </children>
+	          </AnchorPane>
+	       </content>
+	    </Tab>
+	    <Tab text="Expedientes">
+		    <content>
+	       		<fx:include fx:id="ExpedientesPane" source="TablaExpediente.fxml" />
+	       	</content>
+	    </Tab>
+	  </tabs>
+	</TabPane>
+	
+</VBox>	
