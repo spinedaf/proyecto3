@@ -21,6 +21,11 @@
 		    <content>
 	       		<fx:include fx:id="ExpedientesPane" source="TablaExpediente.fxml" />
 	       	</content>
+	    </Tab> 
+	    <Tab text="Consultas">
+		    <content>
+	       		<fx:include fx:id="ConsultasPane" source="TablaConsultas.fxml" />
+	       	</content>
 	    </Tab>
 	  </tabs>
 	</TabPane>
