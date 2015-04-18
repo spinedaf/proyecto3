@@ -23,9 +23,10 @@ public class MultiConsultaTest {
 		int pexpedienteAsociado = 1;
 		
 		MultiConsulta test = new MultiConsulta();
-		Boolean result = test.crear(pcedulaDoctor,pdiaCita,pdescripcion,pexpedienteAsociado);	
+		Consulta result = test.crear(pcedulaDoctor,pdiaCita,pdescripcion,pexpedienteAsociado);
+		Consulta exp = new Consulta(pcedulaDoctor,pdiaCita,pdescripcion,pexpedienteAsociado);
 
-		assertEquals(true,result);
+		assertEquals(exp.getCodigoConsulta(),result.getCodigoConsulta());
 		
 		//fail("Not yet implemented");
 	}

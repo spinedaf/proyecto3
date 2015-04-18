@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import fxmltableview.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="ConsultasPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capaControlador.ControladorConsultas">
@@ -20,42 +28,80 @@
                               <HBox VBox.vgrow="NEVER">
                                  <children>
                                     <Label text="Consultas del paciente: " />
-                                    <ComboBox fx:id="cbPaciente" prefWidth="150.0" promptText="Paciente" />
+                                    <ComboBox fx:id="cbExpediente" prefWidth="150.0" promptText="# Expediente" />
                                  </children>
                               </HBox>
                               <TableView fx:id="tablaConsultas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="# Expediente" />
-                                  <TableColumn prefWidth="75.0" text="Paciente" />
-                                    <TableColumn prefWidth="75.0" text="Doctor" />
-                                    <TableColumn prefWidth="75.0" text="Fecha" />
+                                  <TableColumn prefWidth="75.0" text="# Consulta">
+                                  	  <cellValueFactory>
+            					         <PropertyValueFactory property="CodigoConsulta" />
+            					      </cellValueFactory>
+                                  </TableColumn>
+                                  <TableColumn prefWidth="75.0" text="Expediente">
+                                  	  <cellValueFactory>
+            					         <PropertyValueFactory property="CSMAsociado" />
+            					      </cellValueFactory>
+                                  </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Doctor">
+                                    	<cellValueFactory>
+            					         <PropertyValueFactory property="NombreDoctor" />
+            					      </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Fecha">
+                                    	<cellValueFactory>
+            					        	<PropertyValueFactory property="Fecha" />
+            					      	</cellValueFactory>
+                                    </TableColumn>
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Label text="Citas del paciente">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
+                              
                               <FlowPane VBox.vgrow="NEVER">
                                  <children>
-                                    <ComboBox prefHeight="25.0" prefWidth="104.0" promptText="Expediente" />
-                                    <ComboBox prefHeight="25.0" prefWidth="134.0" promptText="Cita" />
-                                    <ComboBox prefHeight="25.0" prefWidth="113.0" promptText="Doctor" />
-                                    <DatePicker prefHeight="25.0" prefWidth="139.0" promptText="Fecha" />
-                                    <TextField prefHeight="25.0" prefWidth="427.0" promptText="Agregar descripcion" />
-                                    <Button mnemonicParsing="false" text="Agregar" />
+                                    <ComboBox fx:id="cbCita" prefHeight="25.0" prefWidth="134.0" promptText="Cita" />
+                                    <ComboBox fx:id="cbDoctor" prefHeight="25.0" prefWidth="113.0" promptText="Doctor" />
+                                    <DatePicker fx:id="dpFechaConsulta" prefHeight="25.0" prefWidth="139.0" promptText="Fecha" />
+                                    <TextField fx:id="tfDescripcion" prefHeight="25.0" prefWidth="427.0" promptText="Agregar descripcion" />
+                                    <Button mnemonicParsing="false" onAction="#agregarConsulta" text="Agregar" />
                                  </children>
+                              
                               </FlowPane>
+                              <Label text="Citas del paciente">
+	                              <padding>
+	                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+	                              </padding>
+                              </Label>
                               <TableView fx:id="tablaCitas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="# Expediente" />
-                                  <TableColumn prefWidth="75.0" text="Doctor" />
-                                    <TableColumn prefWidth="75.0" text="Dia programado" />
-                                    <TableColumn prefWidth="75.0" text="Descipcion" />
-                                    <TableColumn prefWidth="75.0" text="Estado" />
+                                  <TableColumn prefWidth="75.0" text="# Expediente" >
+	                                  <cellValueFactory>
+	            					  	<PropertyValueFactory property="NumeroExpediente" />
+	            					  </cellValueFactory>
+	                              </TableColumn>
+                                  <TableColumn prefWidth="75.0" text="Doctor" >
+                                  	  <cellValueFactory>
+	            					  	<PropertyValueFactory property="Doctor" />
+	            					  </cellValueFactory>
+                                  </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Dia programado" >
+                                    	<cellValueFactory>
+	            					  		<PropertyValueFactory property="DiaCita" />
+	            					  	</cellValueFactory>
+                                    </TableColumn>
+                                    	
+                                    <TableColumn prefWidth="75.0" text="Descipcion" >
+                                    	<cellValueFactory>
+	            					  		<PropertyValueFactory property="Descripcion" />
+	            					  	</cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="75.0" text="Estado" >
+                                    	<cellValueFactory>
+	            					  		<PropertyValueFactory property="Estado" />
+	            					  	</cellValueFactory>
+                                    </TableColumn>
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -63,10 +109,9 @@
                               </TableView>
                               <FlowPane VBox.vgrow="NEVER">
                                  <children>
-                                    <ComboBox prefHeight="25.0" prefWidth="116.0" promptText="# Expediente" />
-                                    <ComboBox prefHeight="25.0" prefWidth="80.0" promptText="Doctor" />
-                                    <DatePicker prefHeight="25.0" prefWidth="139.0" promptText="Fecha Programada" />
-                                    <TextField prefHeight="25.0" prefWidth="164.0" promptText="Descripción" />
+                                    <ComboBox prefHeight="25.0" prefWidth="147.0" promptText="Doctor" />
+                                    <DatePicker prefHeight="25.0" prefWidth="172.0" promptText="Fecha Programada" />
+                                    <TextField prefHeight="25.0" prefWidth="369.0" promptText="Descripción" />
                                     <Button mnemonicParsing="false" text="Agregar" />
                                     <Button mnemonicParsing="false" text="Cancelar" />
                                  </children>

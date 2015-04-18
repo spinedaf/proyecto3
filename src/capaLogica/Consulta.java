@@ -146,6 +146,13 @@ public class Consulta {
     public int getExpedienteAsociado() {
         return expedienteAsociado;
     }
+    
+    /**
+     * @return the expedienteAsociado
+     */
+    public String getCSMAsociado() {
+        return "CSM-" + expedienteAsociado;
+    }
 
     /**
      * @param expedienteAsociado the expedienteAsociado to set

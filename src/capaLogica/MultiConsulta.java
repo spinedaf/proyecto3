@@ -49,10 +49,10 @@ public class MultiConsulta {
         }
     }
     
-    public boolean crear(String pcedulaDoctor, Date pfechaConsulta, 
+    public Consulta crear(String pcedulaDoctor, Date pfechaConsulta, 
     		String pdescripcion,int expedienteAsociado)
     {
-    	
+    	Consulta consulta = null;
    
         try {
 
@@ -61,13 +61,13 @@ public class MultiConsulta {
             crearConsulta.setString(3, pdescripcion);
             crearConsulta.setInt(4, expedienteAsociado);       
             crearConsulta.executeUpdate();
-            return true;
+            consulta = new Consulta(pcedulaDoctor, pfechaConsulta, pdescripcion, expedienteAsociado);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return false;
+        return consulta;
 
     }
     
