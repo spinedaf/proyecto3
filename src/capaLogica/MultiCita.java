@@ -46,10 +46,12 @@ public class MultiCita {
 	        }
 	    }
 	    
-	    public boolean crear(int pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion,
+	    public Cita crear(int pnumeroExpediente, String pcedulaDoctor, Date pdiaCita, String pdescripcion,
 	            String pestado)
 	    {
 	    	
+	    	
+	    	Cita cita = null;
 	   
 	        try {
 
@@ -57,15 +59,16 @@ public class MultiCita {
 	            crearCita.setString(2, pcedulaDoctor);
 	            crearCita.setDate(3, pdiaCita);
 	            crearCita.setString(4, pdescripcion);
-	            crearCita.setString(5, pestado);           
+	            crearCita.setString(5, pestado);       
+	            cita = new Cita(pnumeroExpediente,pcedulaDoctor,pdiaCita,pdescripcion,pestado);            
 	            crearCita.executeUpdate();
-	            return true;
+	            return cita;
 	            
 	        } catch (SQLException ex) {
 	            ex.printStackTrace();
 	        }
 
-	        return false;
+	        return cita;
 
 	    }
 	    

@@ -6,6 +6,7 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import capaLogica.Examen;
 import capaLogica.MultiExamen;
 
 public class MultiExamenTest {
@@ -25,7 +26,7 @@ public class MultiExamenTest {
 		int pconsultaAsociada = 1;
 		
 		MultiExamen test = new MultiExamen();
-		Boolean result = test.crear(pnombre,pfechaSolicitud,pfechaRealizacion,
+		Examen result = test.crear(pnombre,pfechaSolicitud,pfechaRealizacion,
 				pindicaciones,pconsultaAsociada);	
 
 		assertEquals(true,result);

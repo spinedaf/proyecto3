@@ -49,9 +49,12 @@ public class MultiExamen {
         }
     }
     
-    public boolean crear(String nombre, Date fechaSolicitud, Date fechaRealizacion, 
+    public Examen crear(String nombre, Date fechaSolicitud, Date fechaRealizacion, 
     					 String indicaciones,int consultaAsociada)
     {
+    	
+    	Examen examen = null;
+    	
         try {
 
             crearExamen.setString(1, nombre);
@@ -60,13 +63,15 @@ public class MultiExamen {
             crearExamen.setString(4, indicaciones);
             crearExamen.setInt(5, consultaAsociada);          
             crearExamen.executeUpdate();
-            return true;
+            examen = new Examen(nombre,fechaSolicitud,fechaRealizacion,indicaciones,consultaAsociada);
+            
+            return examen;
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
-        return false;
+        return examen;
 
     }
     
