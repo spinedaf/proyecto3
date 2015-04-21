@@ -40,7 +40,7 @@ public class Consulta {
     public Consulta(int pcodigo, String pnombreDoctor, Date pfecha, String pdescripcion, int pexpediente) {
         
         this.setCedulaDoctor(pnombreDoctor);
-        this.setCodigoConsulta(codigoConsulta);
+        this.setCodigoConsulta(pcodigo);
         this.setFecha(pfecha);
         this.setDescripcion(pdescripcion);
         this.setExpedienteAsociado(pexpediente);

@@ -61,7 +61,14 @@ public class MultiConsulta {
             crearConsulta.setString(3, pdescripcion);
             crearConsulta.setInt(4, expedienteAsociado);       
             crearConsulta.executeUpdate();
-            consulta = new Consulta(pcedulaDoctor, pfechaConsulta, pdescripcion, expedienteAsociado);
+            
+            ResultSet generatedKeys = crearConsulta.getGeneratedKeys();
+            int codigo = 0;
+            if (null != generatedKeys && generatedKeys.next()) {
+            	codigo = generatedKeys.getInt(1);
+            }
+            
+            consulta = new Consulta(codigo, pcedulaDoctor, pfechaConsulta, pdescripcion, expedienteAsociado);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
