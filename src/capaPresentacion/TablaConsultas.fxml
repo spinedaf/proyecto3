@@ -76,28 +76,28 @@
                               </Label>
                               <TableView fx:id="tablaCitas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="# Expediente" >
+                                  <TableColumn prefWidth="75.0" text="# Expediente">
 	                                  <cellValueFactory>
 	            					  	<PropertyValueFactory property="NumeroExpediente" />
 	            					  </cellValueFactory>
 	                              </TableColumn>
-                                  <TableColumn prefWidth="75.0" text="Doctor" >
+                                  <TableColumn prefWidth="75.0" text="Doctor">
                                   	  <cellValueFactory>
 	            					  	<PropertyValueFactory property="Doctor" />
 	            					  </cellValueFactory>
                                   </TableColumn>
-                                    <TableColumn prefWidth="75.0" text="Dia programado" >
+                                    <TableColumn prefWidth="75.0" text="Dia programado">
                                     	<cellValueFactory>
 	            					  		<PropertyValueFactory property="DiaCita" />
 	            					  	</cellValueFactory>
                                     </TableColumn>
                                     	
-                                    <TableColumn prefWidth="75.0" text="Descipcion" >
+                                    <TableColumn prefWidth="75.0" text="Descipcion">
                                     	<cellValueFactory>
 	            					  		<PropertyValueFactory property="Descripcion" />
 	            					  	</cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn prefWidth="75.0" text="Estado" >
+                                    <TableColumn prefWidth="75.0" text="Estado">
                                     	<cellValueFactory>
 	            					  		<PropertyValueFactory property="Estado" />
 	            					  	</cellValueFactory>
@@ -109,10 +109,10 @@
                               </TableView>
                               <FlowPane VBox.vgrow="NEVER">
                                  <children>
-                                    <ComboBox prefHeight="25.0" prefWidth="147.0" promptText="Doctor" />
-                                    <DatePicker prefHeight="25.0" prefWidth="172.0" promptText="Fecha Programada" />
-                                    <TextField prefHeight="25.0" prefWidth="369.0" promptText="Descripción" />
-                                    <Button mnemonicParsing="false" text="Agregar" />
+                                    <ComboBox fx:id="cbDoctor2" prefHeight="25.0" prefWidth="147.0" promptText="Doctor" />
+                                    <DatePicker fx:id="dpFechaConsulta2" prefHeight="25.0" prefWidth="172.0" promptText="Fecha Programada" />
+                                    <TextField fx:id="tfDescripcion2" prefHeight="25.0" prefWidth="369.0" promptText="Descripción" />
+                                    <Button mnemonicParsing="false" onAction="#agregarCita" text="Agregar" />
                                     <Button mnemonicParsing="false" text="Cancelar" />
                                  </children>
                               </FlowPane>

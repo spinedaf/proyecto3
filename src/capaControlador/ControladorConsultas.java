@@ -3,8 +3,14 @@ package capaControlador;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,9 +31,13 @@ public class ControladorConsultas implements Initializable {
 	@FXML private ComboBox<String> cbExpediente;
 	@FXML private ComboBox<String> cbCita;
 	@FXML private ComboBox<String> cbDoctor;
+	@FXML private ComboBox<String> cbDoctor2;
+	
 	@FXML private Label lStatusConsultas;
 	@FXML private DatePicker dpFechaConsulta;
+	@FXML private DatePicker dpFechaConsulta2;
 	@FXML private TextField tfDescripcion;
+	@FXML private TextField tfDescripcion2;
 	
 	/**
      * Initializes the controller class.
@@ -73,11 +83,21 @@ public class ControladorConsultas implements Initializable {
 
     	listaDoctores.addAll(listaComboDoctores);
     	
+    	ObservableList<String> listaDoctores2 = cbDoctor2.getItems();
+    	List<String> listaComboDoctores2 = new ArrayList<String>();
+    	(new MultiDoctor()).buscarTodos()
+		 .forEach(doctor -> listaComboDoctores2.add(doctor.getCedula() + "-" + doctor.getNombre()) );
+
+    	listaDoctores.addAll(listaComboDoctores);
+    	listaDoctores2.addAll(listaComboDoctores2);
+    	
     	//Combobox doctores
     	ObservableList<String> listaCitas = cbCita.getItems();
     	List<String> listaComboCitas = new ArrayList<String>();
     	(new MultiCita()).buscarTodos(numeroExpediente)
 		 .forEach(cita -> listaComboCitas.add(cita.getCodigoCita() + "") );
+
+
 
     	listaCitas.addAll(listaComboCitas);
     }
@@ -105,6 +125,63 @@ public class ControladorConsultas implements Initializable {
              
              data.add(con);
         }
+    }
+    
+    @FXML
+    protected void agregarCita(ActionEvent event) {
+    	
+    	
+    	try {
+    		
+        	int expAsociado = convertirNumeroConsulta(cbExpediente.getValue());
+        	LocalDate fechaPropuesta = dpFechaConsulta2.getValue();
+        	boolean fechasIguales = false;    	
+        	List<Cita> lista = new MultiCita().buscarTodos(expAsociado);
+        	
+        	Instant instant = Instant.from(fechaPropuesta.atStartOfDay(ZoneId.systemDefault()));
+        	java.util.Date fechaPropuestaDate = java.util.Date.from(instant);
+        	
+        	
+        	
+        	Calendar cal1 = Calendar.getInstance();
+        	cal1.setTime(fechaPropuestaDate);  	 
+        	int wk1=cal1.get(Calendar.WEEK_OF_MONTH);
+        	
+       	 	
+        	for (Cita item : lista) {
+        		
+           	 	Calendar cal2 = Calendar.getInstance();
+           	 	cal2.setTime(item.getDiaCita());
+           	 	int wk2=cal2.get(Calendar.WEEK_OF_MONTH);
+       
+        		if (wk1 == wk2){
+        			fechasIguales = true;
+        			break;
+        			
+        		}
+        		
+        	}
+
+        	
+        	
+            if(cbDoctor2.getValue() == null  || fechasIguales == true)
+            {
+            	lStatusConsultas.setText("No se pueden agregar citas sin Doctor o en la misma semana");
+            }else{
+            	 String cedulaDoctor = cbDoctor2.getValue().split("-")[0];
+                 String descripcion = tfDescripcion2.getText();
+                 Date fecha = new java.sql.Date(fechaPropuestaDate.getTime());
+                 String estado = "Activa";             
+                 ObservableList<Cita> data = tablaCitas.getItems();
+                 Cita con = (new MultiCita()).crear(expAsociado,cedulaDoctor, fecha, descripcion, estado );       
+                 data.add(con);
+            }
+    		
+    	} catch (UnsupportedOperationException ex) {
+    	    throw ex;
+    	}
+    	
+
     }
 
 }

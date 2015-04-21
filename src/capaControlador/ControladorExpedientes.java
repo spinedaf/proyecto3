@@ -2,6 +2,9 @@ package capaControlador;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -71,8 +74,17 @@ public class ControladorExpedientes implements Initializable{
     @FXML
     protected void agregarExpediente(ActionEvent event) {
     	ObservableList<Expediente> data = tTablaExpediente.getItems();
+    	
+    	LocalDate fechaApertura = calFechaApertura.getValue();
+    	Instant instant = Instant.from(fechaApertura.atStartOfDay(ZoneId.systemDefault()));
+    	java.util.Date fechaAperturaDate = java.util.Date.from(instant);	
+    	Date fecha = new java.sql.Date(fechaAperturaDate.getTime());
+    	
+    	
+    	
+    	
         Expediente exp = (new MultiExpediente()).crear( cbCedulaPaciente.getValue(), 
-        		new Date(calFechaApertura.getValue().toEpochDay()) );
+        		fecha );
         
         data.add(exp);
         

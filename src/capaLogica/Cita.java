@@ -6,6 +6,9 @@
 package capaLogica;
 
 import java.sql.Date;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  *
@@ -131,6 +134,7 @@ public class Cita {
      * @param diaCita the diaCita to set
      */
     private void setDiaCita(Date diaCita) {
+
         this.diaCita = diaCita;
     }
     
