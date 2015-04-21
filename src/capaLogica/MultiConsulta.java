@@ -94,6 +94,7 @@ public class MultiConsulta {
             	
             	
                resultados.add(new Consulta(
+            		   rs.getInt("codigoConsulta"),
                         rs.getString("cedulaDoctor"),
                         rs.getDate("fechaConsulta"),
                         rs.getString("descripcion"),
@@ -156,6 +157,7 @@ public class MultiConsulta {
             	
             	
                resultados.add(new Consulta(
+            		   rs.getInt("codigoConsulta"),
                         rs.getString("cedulaDoctor"),
                         rs.getDate("fechaConsulta"),
                         rs.getString("descripcion"),
