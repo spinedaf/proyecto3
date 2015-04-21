@@ -53,7 +53,14 @@ public class MultiExpediente {
             crearExpediente.setString(1, pcedulaPaciente);
             crearExpediente.setDate(2, pfechaApertura);
             crearExpediente.executeUpdate();
-            exp = new Expediente(pcedulaPaciente, pfechaApertura);
+            int codigo = 0;
+            
+            ResultSet generatedKeys = crearExpediente.getGeneratedKeys();
+            if (null != generatedKeys && generatedKeys.next()) {
+            	codigo = generatedKeys.getInt(1);
+            }
+            
+            exp = new Expediente(codigo, pcedulaPaciente, pfechaApertura);
             
         } catch (SQLException ex) {
             ex.printStackTrace();

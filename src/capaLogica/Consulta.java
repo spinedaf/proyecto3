@@ -25,6 +25,7 @@ public class Consulta {
     private List<Receta> recetasRecetadas;
     private List<Examen> examenesIndicados;
     private int expedienteAsociado;
+    private Doctor doctor;
     
     public Consulta(String pcedulaDoctor, Date pfecha, String pdescripcion, int pexpediente) {
         
@@ -35,6 +36,7 @@ public class Consulta {
         
         recetasRecetadas = null;
         examenesIndicados = null;
+        doctor = null;
     }
     
     public Consulta(int pcodigo, String pnombreDoctor, Date pfecha, String pdescripcion, int pexpediente) {
@@ -47,9 +49,18 @@ public class Consulta {
         
         recetasRecetadas = null;
         examenesIndicados = null;
+        doctor = null;
     }
 
-    /**
+    public Doctor getDoctor() {
+    	if(doctor == null)
+    	{
+    		doctor = (new MultiDoctor()).buscar(this.cedulaDoctor);
+    	}
+		return doctor;
+	}
+
+	/**
      * @return the codigoConsulta
      */
     public int getCodigoConsulta() {

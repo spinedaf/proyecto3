@@ -98,6 +98,13 @@ public class Receta {
     	}
         return medicina;
     }
+    
+    /**
+     * @return the nombre medicina
+     */
+    public String getNombreMedicina() {
+    	return this.getMedicina().getNombre();
+    }
 
     /**
      * @param dosis the dosis to set

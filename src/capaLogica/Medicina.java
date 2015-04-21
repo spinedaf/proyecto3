@@ -16,6 +16,11 @@ public class Medicina {
 	private String codigo;
 	private String nombre;
     private String precauciones;
+    
+    public Medicina(String pnombre, String pprecauciones)
+    {
+    	this("",pnombre,pprecauciones);
+    }
 
     public Medicina(String pcodigo, String pnombre, String pprecauciones) {
     	this.setCodigo(pcodigo);

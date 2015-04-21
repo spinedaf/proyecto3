@@ -85,13 +85,13 @@ public class MultiReceta {
             while(rs.next())
             {
                 resultados.add(new Receta(
-                        rs.getInt("pcodigoReceta"),
-                        rs.getString("pdosis"),
-                        rs.getInt("pnumeroDias"),
-                        rs.getDate("pfechaDeInicio"),
-                        rs.getDate("pfechaFinalizacion"),
-                        rs.getString("pcodigoMedicina"),
-                        rs.getInt("edad")
+                        rs.getInt("codigoReceta"),
+                        rs.getString("dosis"),
+                        rs.getInt("numeroDias"),
+                        rs.getDate("fechaDeInicio"),
+                        rs.getDate("fechaFinalizacion"),
+                        rs.getString("codigoMedicina"),
+                        rs.getInt("consultaAsociada")
                 ));
             }
         }
@@ -120,13 +120,13 @@ public class MultiReceta {
             rs = buscarReceta.executeQuery();
             if (rs.next()){
             	receta = new Receta(
-            			rs.getInt("pcodigoReceta"),
-                        rs.getString("pdosis"),
-                        rs.getInt("pnumeroDias"),
-                        rs.getDate("pfechaDeInicio"),
-                        rs.getDate("pfechaFinalizacion"),
-                        rs.getString("pcodigoMedicina"),
-                        rs.getInt("edad")
+            			rs.getInt("codigoReceta"),
+                        rs.getString("dosis"),
+                        rs.getInt("numeroDias"),
+                        rs.getDate("fechaDeInicio"),
+                        rs.getDate("fechaFinalizacion"),
+                        rs.getString("codigoMedicina"),
+                        rs.getInt("consultaAsociada")
                 );
             } 
             rs.close();
@@ -143,19 +143,20 @@ public class MultiReceta {
         ResultSet rs = null;
         
         try{
+        	buscarPorConsulta.setInt(1, consultaAsociada);
             rs = buscarPorConsulta.executeQuery();
             resultados = new ArrayList<Receta>();
             
             while(rs.next())
             {
                 resultados.add(new Receta(
-                        rs.getInt("pcodigoReceta"),
-                        rs.getString("pdosis"),
-                        rs.getInt("pnumeroDias"),
-                        rs.getDate("pfechaDeInicio"),
-                        rs.getDate("pfechaFinalizacion"),
-                        rs.getString("pcodigoMedicina"),
-                        rs.getInt("edad")
+                        rs.getInt("codigoReceta"),
+                        rs.getString("dosis"),
+                        rs.getInt("numeroDias"),
+                        rs.getDate("fechaDeInicio"),
+                        rs.getDate("fechaFinalizacion"),
+                        rs.getString("codigoMedicina"),
+                        rs.getInt("consultaAsociada")
                 ));
             }
         }

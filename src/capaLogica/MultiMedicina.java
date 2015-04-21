@@ -105,9 +105,9 @@ public class MultiMedicina {
             rs = buscarMedicina.executeQuery();
             if (rs.next()){
             	medicina = new Medicina(
-            			 rs.getString("pcodigo"),
-                         rs.getString("pnombre"),
-                         rs.getString("pprecauciones")
+            			 rs.getString("codigo"),
+                         rs.getString("nombre"),
+                         rs.getString("precauciones")
                 );
             } 
             rs.close();

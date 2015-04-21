@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
@@ -39,6 +40,15 @@ public class ControladorConsultas implements Initializable {
 	@FXML private TextField tfDescripcion;
 	@FXML private TextField tfDescripcion2;
 	
+	@FXML private TableView tablaRecetas;
+	
+	@FXML private Label labelExpediente; 
+	@FXML private Label labelPaciente;
+	@FXML private Label labelDoctor;
+	@FXML private Label labelFecha;
+	@FXML private Label labelDescripcion;
+	
+	
 	/**
      * Initializes the controller class.
      */
@@ -54,10 +64,38 @@ public class ControladorConsultas implements Initializable {
     	
     	cbExpediente.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> actualizarElementos());
-    
+    	
+    	tablaRecetas.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> actualizarRecetas());
+    	
+    	tablaConsultas.getSelectionModel().selectedItemProperty().addListener(
+    			(observable, oldValue, newValue) -> actualizarConsultasRecetas());
     }    
     
-    public void actualizarElementos()
+    public void actualizarConsultasRecetas()
+    {
+    	//Tabla de Recetas
+    	 
+    	Consulta consulta = (Consulta)tablaConsultas.getSelectionModel().getSelectedItem(); 
+    	ObservableList<Receta> recetas = tablaRecetas.getItems();
+    	List<Receta> listaReceta = (new MultiReceta()).buscarPorConsulta(consulta.getCodigoConsulta());
+    	
+    	recetas.setAll(listaReceta);
+    	
+    	labelExpediente.setText("CSM-" + consulta.getCodigoConsulta());
+    	Expediente exp = (new MultiExpediente()).buscar(consulta.getExpedienteAsociado());
+    	labelPaciente.setText(exp.getPaciente().getNombre());
+    	labelDoctor.setText(consulta.getDoctor().getNombre());
+    	labelFecha.setText(consulta.getFecha().toString());
+    	labelDescripcion.setText(consulta.getDescripcion());
+    }
+    
+    public void actualizarRecetas()
+    {
+    	
+    }
+    
+    public void actualizarElementos( )
     {
     	int numeroExpediente = convertirNumeroConsulta(cbExpediente.getValue());
     	
@@ -97,9 +135,10 @@ public class ControladorConsultas implements Initializable {
     	(new MultiCita()).buscarTodos(numeroExpediente)
 		 .forEach(cita -> listaComboCitas.add(cita.getCodigoCita() + "") );
 
-
-
     	listaCitas.addAll(listaComboCitas);
+    	
+    	
+    	
     }
     
     public int convertirNumeroConsulta(String csm)
@@ -116,7 +155,9 @@ public class ControladorConsultas implements Initializable {
         	lStatusConsultas.setText("No se puede agregar un consulta sin cita especificada y/o doctor");
         }else{
         	 String cedulaDoctor = cbDoctor.getValue().split("-")[0];
-             Date fecha = new Date(dpFechaConsulta.getValue().toEpochDay());
+        	 LocalDate localDate = dpFechaConsulta.getValue();
+        	 java.util.Date fecha1 = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        	 Date fecha = new Date(fecha1.getTime());
              String descripcion = tfDescripcion.getText();
              int expAsociado = convertirNumeroConsulta(cbExpediente.getValue());
              
@@ -175,6 +216,7 @@ public class ControladorConsultas implements Initializable {
                  ObservableList<Cita> data = tablaCitas.getItems();
                  Cita con = (new MultiCita()).crear(expAsociado,cedulaDoctor, fecha, descripcion, estado );       
                  data.add(con);
+                 lStatusConsultas.setText("Cita agregada con éxito.");
             }
     		
     	} catch (UnsupportedOperationException ex) {

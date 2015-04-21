@@ -80,10 +80,7 @@ public class ControladorExpedientes implements Initializable{
     	java.util.Date fechaAperturaDate = java.util.Date.from(instant);	
     	Date fecha = new java.sql.Date(fechaAperturaDate.getTime());
     	
-    	
-    	
-    	
-        Expediente exp = (new MultiExpediente()).crear( cbCedulaPaciente.getValue(), 
+        Expediente exp = (new MultiExpediente()).crear( cbCedulaPaciente.getValue().split("-")[0], 
         		fecha );
         
         data.add(exp);
