@@ -86,7 +86,7 @@
 	                              </TableColumn>
                                   <TableColumn prefWidth="75.0" text="Doctor">
                                   	  <cellValueFactory>
-	            					  	<PropertyValueFactory property="Doctor" />
+	            					  	<PropertyValueFactory property="NombreDoctor" />
 	            					  </cellValueFactory>
                                   </TableColumn>
                                     <TableColumn prefWidth="75.0" text="Dia programado">

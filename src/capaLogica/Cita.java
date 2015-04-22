@@ -60,6 +60,10 @@ public class Cita {
 	}
 
 
+    public String getNombreDoctor() {
+    	return this.getDoctor().getNombre();
+	}
+    
 
 	private void setDoctor(Doctor doctor) {
 		this.doctor = doctor;

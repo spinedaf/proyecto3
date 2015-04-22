@@ -71,7 +71,7 @@ public class Consulta {
      * @return the nombreDoctor
      */
     public String getNombreDoctor() {
-        return cedulaDoctor;
+        return this.getDoctor().getNombre();
     }
 
     /**
