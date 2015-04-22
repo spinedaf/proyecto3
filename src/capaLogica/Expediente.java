@@ -22,6 +22,7 @@ public class Expediente {
     private Date fechaApertura;
     private Paciente paciente;
     private List<Consulta> listaConsultas;
+    private List<Cita> listaCitas;
     
     public Expediente(String pcedulaPaciente, Date pfechaApertura) 
     {
@@ -39,6 +40,7 @@ public class Expediente {
         
         paciente = null;
         listaConsultas = null;
+        listaCitas = null;
     }
 
     /**
@@ -90,6 +92,17 @@ public class Expediente {
     }
 
     /**
+     * @return the listaConsultas
+     */
+    public List<Cita> getListaCitas() {
+    	if(listaCitas == null)
+    	{
+    		listaCitas = (new MultiCita()).buscarTodos(this.getNumeroExpediente());
+    	}
+        return listaCitas;
+    }
+    
+    /**
      * @param numeroExpediente the numeroExpediente to set
      */
     private void setNumeroExpediente(int numeroExpediente) {
@@ -122,6 +135,13 @@ public class Expediente {
      */
     private void setListaConsultas(ArrayList<Consulta> listaConsultas) {
         this.listaConsultas = listaConsultas;
+    }
+    
+    /**
+     * @param listaCitas the listaCitas to set
+     */
+    private void setListaCitas(ArrayList<Cita> listaCitas) {
+        this.listaCitas = listaCitas;
     }
     
     public void registrarConsulta(String pnombreDoctor, Date pfehcaRealizacion, Date pdescripcionProm, 
