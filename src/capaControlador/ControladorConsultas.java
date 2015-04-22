@@ -27,8 +27,8 @@ import capaLogica.*;
 
 public class ControladorConsultas implements Initializable {
 	
-	@FXML private TableView tablaConsultas;
-	@FXML private TableView tablaCitas;
+	@FXML private TableView<Consulta> tablaConsultas;
+	@FXML private TableView<Cita> tablaCitas;
 	@FXML private ComboBox<String> cbExpediente;
 	@FXML private ComboBox<String> cbCita;
 	@FXML private ComboBox<String> cbDoctor;
@@ -40,7 +40,10 @@ public class ControladorConsultas implements Initializable {
 	@FXML private TextField tfDescripcion;
 	@FXML private TextField tfDescripcion2;
 	
-	@FXML private TableView tablaRecetas;
+	@FXML private TableView<Receta> tablaRecetas;
+	@FXML private Label labelDiasPrescritos;
+	@FXML private Label labelFechaInicio;
+	@FXML private Label labelFechaFinal;
 	
 	@FXML private Label labelExpediente; 
 	@FXML private Label labelPaciente;
@@ -66,17 +69,16 @@ public class ControladorConsultas implements Initializable {
                 (observable, oldValue, newValue) -> actualizarElementos());
     	
     	tablaRecetas.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> actualizarRecetas());
+                (observable, oldValue, newValue) -> actualizarRecetas(newValue));
     	
     	tablaConsultas.getSelectionModel().selectedItemProperty().addListener(
-    			(observable, oldValue, newValue) -> actualizarConsultasRecetas());
+    			(observable, oldValue, newValue) -> actualizarConsultasRecetas(newValue));   			
+    	
     }    
     
-    public void actualizarConsultasRecetas()
+    public void actualizarConsultasRecetas(Consulta consulta)
     {
     	//Tabla de Recetas
-    	 
-    	Consulta consulta = (Consulta)tablaConsultas.getSelectionModel().getSelectedItem(); 
     	ObservableList<Receta> recetas = tablaRecetas.getItems();
     	List<Receta> listaReceta = (new MultiReceta()).buscarPorConsulta(consulta.getCodigoConsulta());
     	
@@ -90,9 +92,11 @@ public class ControladorConsultas implements Initializable {
     	labelDescripcion.setText(consulta.getDescripcion());
     }
     
-    public void actualizarRecetas()
+    public void actualizarRecetas(Receta receta)
     {
-    	
+    	labelDiasPrescritos.setText(receta.getNumeroDias() + "");
+    	labelFechaInicio.setText(receta.getFechaDeInicio().toString());
+    	labelFechaFinal.setText(receta.getFechaFinalizacion().toString());
     }
     
     public void actualizarElementos( )
@@ -216,7 +220,7 @@ public class ControladorConsultas implements Initializable {
                  ObservableList<Cita> data = tablaCitas.getItems();
                  Cita con = (new MultiCita()).crear(expAsociado,cedulaDoctor, fecha, descripcion, estado );       
                  data.add(con);
-                 lStatusConsultas.setText("Cita agregada con éxito.");
+                 lStatusConsultas.setText("Cita agregada con ï¿½xito.");
             }
     		
     	} catch (UnsupportedOperationException ex) {

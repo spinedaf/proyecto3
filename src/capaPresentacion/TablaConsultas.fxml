@@ -127,7 +127,12 @@
                      <children>
                         <Accordion layoutX="91.0" layoutY="151.0" prefHeight="581.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <panes>
-                            <TitledPane expanded="false" text="Detalles de Consulta">
+                            <TitledPane expanded="false" text="Examenes">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </TitledPane>
+                            <TitledPane text="Detalles de Consulta" textOverrun="CLIP">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -209,11 +214,6 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
-                              </content>
-                            </TitledPane>
-                            <TitledPane expanded="false" text="Examenes">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                               </content>
                             </TitledPane>
                           </panes>
