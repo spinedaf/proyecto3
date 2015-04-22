@@ -139,13 +139,13 @@ public class MultiExamen {
         return examen;
     }
     
-    public List<Examen> buscarPorConsulta()
+    public List<Examen> buscarPorConsulta( int pexpedienteAsociado )
     {
         List<Examen> resultados = null;
         ResultSet rs = null;
         
         try{
-        	
+        	buscarPorConsulta.setInt(1, pexpedienteAsociado);
             rs = buscarPorConsulta.executeQuery();
             resultados = new ArrayList<Examen>();
             

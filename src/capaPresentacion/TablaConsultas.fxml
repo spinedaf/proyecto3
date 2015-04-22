@@ -129,7 +129,29 @@
                           <panes>
                             <TitledPane expanded="false" text="Examenes">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" >
+                                	<children>
+                                		<TableView fx:id="tablaExamenes" prefHeight="221.0" prefWidth="301.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="Nombre">
+   	                                  			<cellValueFactory>
+	            					  				<PropertyValueFactory property="Nombre" />
+	            					  			</cellValueFactory>
+	                              				</TableColumn>
+                                              <TableColumn prefWidth="104.0" text="Fecha Solicitud">
+     	                                  			<cellValueFactory>
+	            					  				<PropertyValueFactory property="FechaSolcitud" />
+	            					  			</cellValueFactory>
+	                              				</TableColumn>
+                                                <TableColumn prefWidth="118.0" text="Fecha Realizacion">
+                                                   <cellValueFactory>
+	            					  				<PropertyValueFactory property="FechaRealizacion" />
+	            					  			</cellValueFactory>
+	                              				</TableColumn>
+                                            </columns>
+                                          </TableView>
+                                	</children>
+                                </AnchorPane>
                               </content>
                             </TitledPane>
                             <TitledPane text="Detalles de Consulta" textOverrun="CLIP">

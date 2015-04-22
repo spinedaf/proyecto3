@@ -29,6 +29,7 @@ public class ControladorConsultas implements Initializable {
 	
 	@FXML private TableView<Consulta> tablaConsultas;
 	@FXML private TableView<Cita> tablaCitas;
+	@FXML private TableView<Examen> tablaExamenes;
 	@FXML private ComboBox<String> cbExpediente;
 	@FXML private ComboBox<String> cbCita;
 	@FXML private ComboBox<String> cbDoctor;
@@ -90,6 +91,10 @@ public class ControladorConsultas implements Initializable {
     	labelDoctor.setText(consulta.getDoctor().getNombre());
     	labelFecha.setText(consulta.getFecha().toString());
     	labelDescripcion.setText(consulta.getDescripcion());
+    	
+    	ObservableList<Examen> examenes = tablaExamenes.getItems();
+    	List<Examen> listaExamenes = (new MultiExamen()).buscarPorConsulta(consulta.getCodigoConsulta());
+    	examenes.setAll(listaExamenes);
     }
     
     public void actualizarRecetas(Receta receta)
